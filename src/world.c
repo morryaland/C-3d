@@ -1,4 +1,4 @@
-#include "include/world.h"
+#include "world.h"
 
 static obj_t read_obj( char *path );
 

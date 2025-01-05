@@ -1,15 +1,4 @@
-#include "include/render.h"
-
-#ifdef win
-
-void gotoxy(int x, int y) {
-    COORD coord;
-    coord.X = x;
-    coord.Y = y;
-    SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), coord);
-}
-
-#endif
+#include "render.h"
 
 void clean_screen( char screen[] ) {
     memset( screen, 32, H_SCREEN * W_SCREEN - 1 );

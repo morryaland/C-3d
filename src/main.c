@@ -1,5 +1,5 @@
-#include "include/world.h"
-#include "include/render.h"
+#include "world.h"
+#include "render.h"
 
 world_t *myworld;
 camera_t camera;
@@ -23,9 +23,7 @@ int main(int argc, char* argv[]) {
     //push_obj( &myworld->objs[0], pushdist );
     //origin_point_obj(&myworld->objs[0], myworld->objs[0].orig);
     for(;;) {
-        #ifdef win
-            gotoxy(0, 0);
-        #endif
+        puts("\033[H\033[J");
         clean_screen( screen );
         screen_proection( myworld, &camera, vecarr );
         for (size_t i = 0; i < myworld->c_objs; i++) {

@@ -1,2 +1,28 @@
-main: .\src\3d_mach.c .\src\world.c .\src\render.c .\src\main.c
-	gcc  .\src\3d_mach.c .\src\world.c .\src\render.c .\src\main.c -o .\bin\main.exe
+TARGET=C-3d
+CC=gcc
+MKDIR=mkdir -p
+
+BIN_PATH = ./bin/
+SRC_PATH = ./src/
+OBJ_PATH = ./obj/
+
+SRC = $(shell find $(SRC_PATH) -type f -name '*.c')
+OBJ = $(patsubst $(SRC_PATH)%.c, $(OBJ_PATH)%.o,$(SRC))
+
+CFLAGS+= -g -O2 -I/usr/local/include -I./include
+LDFLAGS+= -lm
+
+.PHONY: all clean
+
+all: $(BIN_PATH)$(TARGET)
+
+$(BIN_PATH)$(TARGET): $(OBJ)
+	$(CC) -o $@ $^ $(LDFLAGS) $(CFLAGS) 
+
+$(OBJ_PATH)%.o: $(SRC_PATH)%.c
+	$(MKDIR) $(@D)
+	$(CC) -c -o $@ $< $(CFLAGS)
+
+clean:
+	rm -fr $(OBJ_PATH)
+	rm -f $(BIN_PATH)$(TARGET)
