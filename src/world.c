@@ -1,7 +1,5 @@
-#include "world.h"
 
-static obj_t read_obj( char *path );
-
+/*
 void origin_point_obj( const obj_t *entity, vec3_t res )
 {
     for (size_t i = 0; i < entity->c_v; i++) {
@@ -33,58 +31,6 @@ void push_obj  ( obj_t *entity, const vec3_t dist ) {
     for (size_t i = 0; i < entity->c_v; i++) {
         push_vec3( entity->v[i], dist );
     }
-}
-static obj_t read_obj( char* path )
-{
-    obj_t new_obj;
-    new_obj.v = NULL;
-    new_obj.l = NULL;
-    memset( new_obj.orig, 0, sizeof( vec3_t ) );
-    
-    FILE* fp = fopen(path, "r");
-    if (!fp) {
-        puts( "failed to open file" );
-        return new_obj;
-    }
-    char buff[10000][200];
-    int i = 0;
-    for (; (fgets(buff[i],200, fp)) != NULL ;) {
-        i++;
-    }
-    fclose(fp);
-    
-    int v = 0, l = 0;
-    for (size_t j = 0; j < i; j++) {
-        switch ( buff[j][0] ) {
-        case 'o':
-            sscanf( buff[j], "o %s", &new_obj.name );
-            break;
-        case 'v':
-            float x;
-            float y;
-            float z;
-            sscanf( buff[j], "v %f %f %f", &x, &y, &z );
-            new_obj.v = (vec3_t*) realloc( (void*)new_obj.v, sizeof( vec3_t ) * (v + 1) );
-            new_obj.v[v][0] = x;
-            new_obj.v[v][1] = y;
-            new_obj.v[v][2] = z;
-            v++;
-            break;
-        case 'l':
-            int a;
-            int b;
-            sscanf( buff[j], "l %i %i", &a, &b );
-            new_obj.l = (index_t*) realloc( (void*)new_obj.l, sizeof( index_t ) * (l + 1) );
-            new_obj.l[l].a = a - 1; /* subtract 1 since the report starts from zero */
-            new_obj.l[l].b = b - 1;
-            l++;
-            break;
-        }
-    }
-    new_obj.c_l = l;
-    new_obj.c_v = v;
-    origin_point_obj( &new_obj, new_obj.orig );
-    return new_obj;
 }
 world_t* read_obj_dir( void )
 { 
@@ -125,3 +71,4 @@ world_t* read_obj_dir( void )
     }
     return &new_world;
 }
+*/

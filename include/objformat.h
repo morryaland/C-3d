@@ -2,6 +2,7 @@
 #define objformat_h
 
 #include "3d_mach.h"
+#include <stdbool.h>
 
 enum cstype_e {
   bmatrix,
@@ -62,5 +63,8 @@ typedef struct objformat_s {
       surf_c, parmu_c, parmv_c, trim_c, 
       hole_c, scrv_c;
 } objformat_t;
+
+objformat_t *obj_load_file(char *pach);
+void        obj_free(objformat_t *obj);
 
 #endif

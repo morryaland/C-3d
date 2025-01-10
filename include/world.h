@@ -11,7 +11,7 @@
 
 #define PATH_TO_OBJ_DIR "obj"
 
-
+/*
 struct world_s {
     obj_t* objs;
     int c_objs;
@@ -31,5 +31,6 @@ void origin_point_obj(const obj_t *entity, vec3_t res);
 void push_obj  (obj_t *entity, const vec3_t dist);
 void rotate_obj(obj_t *entity, float angle, basis_t basis);
 void rotate_cam_on_orig(camera_t *cam, float angle, basis_t basis);
+*/
 
 #endif
