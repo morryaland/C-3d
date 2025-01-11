@@ -10,7 +10,7 @@ SRC = $(shell find $(SRC_PATH) -type f -name '*.c')
 OBJ = $(patsubst $(SRC_PATH)%.c, $(OBJ_PATH)%.o,$(SRC))
 
 CFLAGS+= -g -O2 -I/usr/local/include -I./include
-LDFLAGS+= -lm
+LDFLAGS+= -lm -lpthread
 
 .PHONY: all clean
 

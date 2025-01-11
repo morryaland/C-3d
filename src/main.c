@@ -3,6 +3,6 @@
 #include "objformat.h"
 
 int main(int argc, char* argv[]) {
-  obj_load_file(argv[1]);
+  objformat_t *obj = obj_load_file(argv[1]);
   return 0;
 }

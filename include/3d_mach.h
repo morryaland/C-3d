@@ -17,14 +17,14 @@ typedef enum basis_s {
 } basis_t;
 
 /* vectors */
-typedef float  vec_t;
-typedef int    veci_t;
-typedef vec_t  vec2_t [2];
-typedef veci_t veci2_t[2];
-typedef vec_t  vec3_t [3];
-typedef veci_t veci3_t[3];
-typedef vec_t  vec4_t [4];
-typedef veci_t veci4_t[4];
+typedef float vec_t  [1];
+typedef int   veci_t [1];
+typedef float vec2_t [2];
+typedef int   veci2_t[2];
+typedef float vec3_t [3];
+typedef int   veci3_t[3];
+typedef float vec4_t [4];
+typedef int   veci4_t[4];
 
 /* multiplication matrix 3x3 */
 void mul_Matrix3x3(float mtx1[3][3], float mtx2[3][3], float mtxres[3][3]);
