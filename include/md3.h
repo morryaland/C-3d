@@ -100,6 +100,7 @@ typedef struct md3_s {
 } md3_t;
 
 md3_t *md3_load_file(char *path);
+void md3_free(md3_t *md3);
 
 md3_header_t md3_read_header(FILE *fp);
 md3_frame_t   *md3_read_frames  (FILE *fp, S32 ofs, S32 num);

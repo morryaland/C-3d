@@ -18,10 +18,10 @@ md3_header_t md3_read_header(FILE *fp)
 {
   md3_header_t md3h = {};
   fread(&md3h, sizeof(md3_header_t), 1, fp);
-  assert(strncmp((char*)&md3h.ident, MD3_MAGIC, sizeof(S32)) && "md3 header ident is not valid");
-  assert(md3h.num_frames > MD3_MAX_FRAMES && "the number of frames exceeds the maximum");
-  assert(md3h.num_tags > MD3_MAX_TAGS && "the number of tags exceeds the maximum");
-  assert(md3h.num_surfaces > MD3_MAX_SURFACES && "the number of surfaces exceeds the maximum");
+  assert(!strncmp((char*)&md3h.ident, MD3_MAGIC, sizeof(S32)) && "md3 header ident is not valid");
+  assert(md3h.num_frames < MD3_MAX_FRAMES && "the number of frames exceeds the maximum");
+  assert(md3h.num_tags < MD3_MAX_TAGS && "the number of tags exceeds the maximum");
+  assert(md3h.num_surfaces < MD3_MAX_SURFACES && "the number of surfaces exceeds the maximum");
   return md3h;
 }
 
@@ -44,12 +44,13 @@ md3_tag_t *md3_read_tags(FILE *fp, S32 ofs, S32 num)
 md3_surface_t *md3_read_surfaces(FILE *fp, S32 ofs, S32 num)
 {
   md3_surface_t *md3s = calloc(num, sizeof(md3_surface_t));
+  fseek(fp, ofs, SEEK_SET);
   for (int i = 0; i < num; i++) {
     md3s[i].header     = md3_read_surface_header(fp, ofs);
-    assert(strncmp((char*)&md3s[i].header.ident, MD3_MAGIC, sizeof(S32)) && "md3 surface header ident is not valid");
-    assert(md3s[i].header.num_shaders > MD3_MAX_SHADERS && "the number of shaders exceeds the maximum");
-    assert(md3s[i].header.num_verts > MD3_MAX_VERTS && "the number of verts exceeds the maximum");
-    assert(md3s[i].header.num_triangles > MD3_MAX_TRIANGLES && "the number of triangles exceeds the maximum");
+    assert(!strncmp((char*)&md3s[i].header.ident, MD3_MAGIC, sizeof(S32)) && "md3 surface header ident is not valid");
+    assert(md3s[i].header.num_shaders < MD3_MAX_SHADERS && "the number of shaders exceeds the maximum");
+    assert(md3s[i].header.num_verts < MD3_MAX_VERTS && "the number of verts exceeds the maximum");
+    assert(md3s[i].header.num_triangles < MD3_MAX_TRIANGLES && "the number of triangles exceeds the maximum");
     md3s[i].shaders    = md3_read_shaders   (fp, ofs + md3s[i].header.ofs_shaders,   md3s[i].header.num_shaders);
     md3s[i].triangles  = md3_read_triangles (fp, ofs + md3s[i].header.ofs_triangles, md3s[i].header.num_triangles);
     md3s[i].tex_coords = md3_read_tex_coords(fp, ofs + md3s[i].header.ofs_st,        md3s[i].header.num_verts);
@@ -95,4 +96,20 @@ md3_vertex_t *md3_read_vertexs(FILE *fp, S32 ofs, S32 num)
   fseek(fp, ofs, SEEK_SET);
   fread(md3v, sizeof(md3_vertex_t), num, fp);
   return md3v;
+}
+
+void md3_free(md3_t *md3)
+{
+  if (!md3)
+    return;
+  free(md3->tags);
+  free(md3->frames);
+  for (int i = 0; i < md3->header.num_surfaces; i++) {
+    free(md3->surfaces[i].shaders);
+    free(md3->surfaces[i].vertexs);
+    free(md3->surfaces[i].triangles);
+    free(md3->surfaces[i].tex_coords);
+  }
+  free(md3->surfaces);
+  free(md3);
 }
