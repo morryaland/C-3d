@@ -99,16 +99,17 @@ typedef struct md3_s {
   md3_surface_t *surfaces;
 } md3_t;
 
-md3_t *md3_load_file();
+md3_t *md3_load_file(char *path);
 
 md3_header_t md3_read_header(FILE *fp);
-md3_frame_t   *md3_read_frames (FILE *fp, S32 ofs, S32 num);
-md3_tag_t     *md3_read_tags   (FILE *fp, S32 ofs, S32 num);
-md3_surface_t *md3_read_surface(FILE *fp, S32 ofs, S32 num);
+md3_frame_t   *md3_read_frames  (FILE *fp, S32 ofs, S32 num);
+md3_tag_t     *md3_read_tags    (FILE *fp, S32 ofs, S32 num);
+md3_surface_t *md3_read_surfaces(FILE *fp, S32 ofs, S32 num);
 
-md3_header_t md3_read_surface_header(FILE *fp, S32 ofs);
+md3_surface_header_t md3_read_surface_header(FILE *fp, S32 ofs);
 md3_shader_t    *md3_read_shaders   (FILE *fp, S32 ofs, S32 num);
 md3_triangle_t  *md3_read_triangles (FILE *fp, S32 ofs, S32 num);
 md3_tex_coord_t *md3_read_tex_coords(FILE *fp, S32 ofs, S32 num);
+md3_vertex_t    *md3_read_vertexs   (FILE *fp, S32 ofs, S32 num);
 
 #endif
