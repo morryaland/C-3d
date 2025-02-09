@@ -4,8 +4,10 @@
 
 md3_t *md3_load_file(char *path)
 {
-  md3_t *md3 = malloc(sizeof(md3_t));
-  FILE *fp = fopen(path, "rb");
+  md3_t *md3;
+  FILE *fp;
+  md3 = malloc(sizeof(md3_t));
+  fp = fopen(path, "rb");
   md3->header = md3_read_header(fp);
   md3->frames   = md3_read_frames  (fp, md3->header.ofs_frames,   md3->header.num_frames);
   md3->tags     = md3_read_tags    (fp, md3->header.ofs_tags,     md3->header.num_tags);
@@ -27,7 +29,8 @@ md3_header_t md3_read_header(FILE *fp)
 
 md3_frame_t *md3_read_frames(FILE *fp, S32 ofs, S32 num)
 {
-  md3_frame_t *md3f = calloc(num, sizeof(md3_frame_t));
+  md3_frame_t *md3f;
+  md3f = calloc(num, sizeof(md3_frame_t));
   fseek(fp, ofs, SEEK_SET);
   fread(md3f, sizeof(md3_frame_t), num, fp);
   return md3f;
@@ -35,7 +38,8 @@ md3_frame_t *md3_read_frames(FILE *fp, S32 ofs, S32 num)
 
 md3_tag_t *md3_read_tags(FILE *fp, S32 ofs, S32 num)
 {
-  md3_tag_t *md3t = calloc(num, sizeof(md3_tag_t));
+  md3_tag_t *md3t;
+  md3t = calloc(num, sizeof(md3_tag_t));
   fseek(fp, ofs, SEEK_SET);
   fread(md3t, sizeof(md3_tag_t), num, fp);
   return md3t;
@@ -43,7 +47,8 @@ md3_tag_t *md3_read_tags(FILE *fp, S32 ofs, S32 num)
 
 md3_surface_t *md3_read_surfaces(FILE *fp, S32 ofs, S32 num)
 {
-  md3_surface_t *md3s = calloc(num, sizeof(md3_surface_t));
+  md3_surface_t *md3s;
+  md3s = calloc(num, sizeof(md3_surface_t));
   fseek(fp, ofs, SEEK_SET);
   for (int i = 0; i < num; i++) {
     md3s[i].header     = md3_read_surface_header(fp, ofs);
@@ -68,7 +73,8 @@ md3_surface_header_t md3_read_surface_header(FILE *fp, S32 ofs)
 
 md3_shader_t *md3_read_shaders(FILE *fp, S32 ofs, S32 num)
 {
-  md3_shader_t *md3s = calloc(num, sizeof(md3_shader_t));
+  md3_shader_t *md3s;
+  md3s = calloc(num, sizeof(md3_shader_t));
   fseek(fp, ofs, SEEK_SET);
   fread(md3s, sizeof(md3_shader_t), num, fp);
   return md3s;
@@ -76,7 +82,8 @@ md3_shader_t *md3_read_shaders(FILE *fp, S32 ofs, S32 num)
 
 md3_triangle_t *md3_read_triangles(FILE *fp, S32 ofs, S32 num)
 {
-  md3_triangle_t *md3t = calloc(num, sizeof(md3_triangle_t));
+  md3_triangle_t *md3t;
+  md3t = calloc(num, sizeof(md3_triangle_t));
   fseek(fp, ofs, SEEK_SET);
   fread(md3t, sizeof(md3_triangle_t), num, fp);
   return md3t;
@@ -84,7 +91,8 @@ md3_triangle_t *md3_read_triangles(FILE *fp, S32 ofs, S32 num)
 
 md3_tex_coord_t *md3_read_tex_coords(FILE *fp, S32 ofs, S32 num)
 {
-  md3_tex_coord_t *md3tc = calloc(num, sizeof(md3_tex_coord_t));
+  md3_tex_coord_t *md3tc;
+  md3tc = calloc(num, sizeof(md3_tex_coord_t));
   fseek(fp, ofs, SEEK_SET);
   fread(md3tc, sizeof(md3_tex_coord_t), num, fp);
   return md3tc;
@@ -92,7 +100,8 @@ md3_tex_coord_t *md3_read_tex_coords(FILE *fp, S32 ofs, S32 num)
 
 md3_vertex_t *md3_read_vertexs(FILE *fp, S32 ofs, S32 num)
 {
-  md3_vertex_t *md3v = calloc(num, sizeof(md3_vertex_t));
+  md3_vertex_t *md3v;
+  md3v = calloc(num, sizeof(md3_vertex_t));
   fseek(fp, ofs, SEEK_SET);
   fread(md3v, sizeof(md3_vertex_t), num, fp);
   return md3v;

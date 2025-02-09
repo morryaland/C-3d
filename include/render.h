@@ -1,6 +1,10 @@
 #ifndef render_h
 #define render_h
 
-#include "3d_mach.h"
+int init_render();
+
+#define init_window() init_xwindow()
+
+int init_xwindow();
 
 #endif

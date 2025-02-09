@@ -1,6 +1,6 @@
-TARGET=C-3d
-CC=gcc
-MKDIR=mkdir -p
+TARGET = @PACKAGE_NAME@@EXEEXT@
+CC = @CC@
+MKDIR = @MKDIR_P@
 
 BIN_PATH = ./bin/
 SRC_PATH = ./src/
@@ -9,8 +9,8 @@ OBJ_PATH = ./obj/
 SRC = $(shell find $(SRC_PATH) -type f -name '*.c')
 OBJ = $(patsubst $(SRC_PATH)%.c, $(OBJ_PATH)%.o,$(SRC))
 
-CFLAGS+= -g -O2 -I/usr/local/include -I./include
-LDFLAGS+= -lm -lpthread
+CFLAGS+= -g -O2 -I/usr/local/include -I./include @CFLAGS@
+LDFLAGS+= -lm -lpthread @LDFLAGS@
 
 .PHONY: all clean
 

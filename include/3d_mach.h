@@ -38,7 +38,7 @@ void mul_vec2(const vec2_t a, const vec2_t b, vec2_t out);
 
 /* vector interaction */
 void copy_vec3  (vec3_t changed, const vec3_t source);
-void rotate_vec3(vec3_t vec, float angle, basis_t basis);
+void rotate_vec3(vec3_t vec, vec3_t angle);
 void move_vec3  (vec3_t vec, const vec3_t coords);
 void push_vec3  (vec3_t vec, const vec3_t dist);
 void norm_vec3  (vec3_t vec);

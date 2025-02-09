@@ -1,4 +1,5 @@
 #include "md3.h"
+#include "render.h"
 
 int main(int argc, char* argv[]) {
   md3_t *mesh = md3_load_file(argv[1]);
@@ -40,5 +41,6 @@ int main(int argc, char* argv[]) {
   printf("%d\n", mesh->surfaces[0].header.ofs_xyznormal);
   printf("%d\n", mesh->surfaces[0].header.ofs_end);
   md3_free(mesh);
+  for(;;);
   return 0;
 }
