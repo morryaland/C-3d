@@ -597,12 +597,6 @@ echo 'BEGIN {' >"$ac_tmp/subs1.awk" &&
 cat >>"$ac_tmp/subs1.awk" <<\_ACAWK &&
 S["LTLIBOBJS"]=""
 S["LIBOBJS"]=""
-S["X_EXTRA_LIBS"]=""
-S["X_LIBS"]=""
-S["X_PRE_LIBS"]=" -lSM -lICE"
-S["X_CFLAGS"]=""
-S["CPP"]="gcc -E"
-S["XMKMF"]=""
 S["host_os"]="linux-gnu"
 S["host_vendor"]="pc"
 S["host_cpu"]="x86_64"
