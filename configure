@@ -713,7 +713,7 @@ ac_user_opts='
 enable_option_checking
 with_X11
 with_wayland
-with_ncurses
+with_GL
 '
       ac_precious_vars='build_alias
 host_alias
@@ -1349,7 +1349,7 @@ Optional Packages:
   --without-PACKAGE       do not use PACKAGE (same as --with-PACKAGE=no)
   --with-X11 (default)
   --with-wayland
-  --with-ncurses
+  --with-GL
 
 Some influential environment variables:
   CC          C compiler command
@@ -1553,6 +1553,53 @@ printf "%s\n" "$ac_res" >&6; }
   eval $as_lineno_stack; ${as_lineno_stack:+:} unset as_lineno
 
 } # ac_fn_c_check_header_compile
+
+# ac_fn_c_try_link LINENO
+# -----------------------
+# Try to link conftest.$ac_ext, and return whether this succeeded.
+ac_fn_c_try_link ()
+{
+  as_lineno=${as_lineno-"$1"} as_lineno_stack=as_lineno_stack=$as_lineno_stack
+  rm -f conftest.$ac_objext conftest.beam conftest$ac_exeext
+  if { { ac_try="$ac_link"
+case "(($ac_try" in
+  *\"* | *\`* | *\\*) ac_try_echo=\$ac_try;;
+  *) ac_try_echo=$ac_try;;
+esac
+eval ac_try_echo="\"\$as_me:${as_lineno-$LINENO}: $ac_try_echo\""
+printf "%s\n" "$ac_try_echo"; } >&5
+  (eval "$ac_link") 2>conftest.err
+  ac_status=$?
+  if test -s conftest.err; then
+    grep -v '^ *+' conftest.err >conftest.er1
+    cat conftest.er1 >&5
+    mv -f conftest.er1 conftest.err
+  fi
+  printf "%s\n" "$as_me:${as_lineno-$LINENO}: \$? = $ac_status" >&5
+  test $ac_status = 0; } && {
+	 test -z "$ac_c_werror_flag" ||
+	 test ! -s conftest.err
+       } && test -s conftest$ac_exeext && {
+	 test "$cross_compiling" = yes ||
+	 test -x conftest$ac_exeext
+       }
+then :
+  ac_retval=0
+else $as_nop
+  printf "%s\n" "$as_me: failed program was:" >&5
+sed 's/^/| /' conftest.$ac_ext >&5
+
+	ac_retval=1
+fi
+  # Delete the IPA/IPO (Inter Procedural Analysis/Optimization) information
+  # created by the PGI compiler (conftest_ipa8_conftest.oo), as it would
+  # interfere with the next link command; also delete a directory that is
+  # left behind by Apple's compiler.  We do this before executing the actions.
+  rm -rf conftest.dSYM conftest_ipa8_conftest.oo
+  eval $as_lineno_stack; ${as_lineno_stack:+:} unset as_lineno
+  as_fn_set_status $ac_retval
+
+} # ac_fn_c_try_link
 ac_configure_args_raw=
 for ac_arg
 do
@@ -4222,10 +4269,9 @@ fi
 # Check whether --with-X11 was given.
 if test ${with_X11+y}
 then :
-  withval=$with_X11; if test x$withval = xyes; then
+  withval=$with_X11; if test "x$withval" = xyes; then
               with_X11 = yes
               with_wayland = no
-              with_ncurses = no
             else
               with_X11 = no
             fi
@@ -4237,10 +4283,9 @@ fi
 # Check whether --with-wayland was given.
 if test ${with_wayland+y}
 then :
-  withval=$with_wayland; if test x$withval = xyes; then
+  withval=$with_wayland; if test "x$withval" = xyes; then
               with_wayland = yes
               with_X11 = no
-              with_ncurses = no
             else
               with_wayland = no
             fi
@@ -4249,34 +4294,164 @@ else $as_nop
 fi
 
 
-# Check whether --with-ncurses was given.
-if test ${with_ncurses+y}
+
+# Check whether --with-GL was given.
+if test ${with_GL+y}
 then :
-  withval=$with_ncurses; if test x$withval = xyes; then
-              with_ncurses = yes
-              with_X11 = no
-              with_wayland = no
+  withval=$with_GL; if test "x$withval" = xyes; then
+              with_GL = yes
             else
-              with_ncurses = no
+              with_GL = no
             fi
 else $as_nop
-  with_ncurses=no
+  with_GL=no
 fi
 
 
 if test "x$with_X11" = xyes && test "x$with_wayland" = xyes; then
   as_fn_error $? "X11 and Wayland support cannot be enabled simultaneously." "$LINENO" 5
 fi
-if test "x$with_X11" = xyes && test "x$with_ncurses" = xyes; then
-  as_fn_error $? "X11 and Ncurses support cannot be enabled simultaneously." "$LINENO" 5
-fi
-if test "x$with_wayland" = xyes && test "x$with_ncurses" = xyes; then
-  as_fn_error $? "Wayland and Ncurses support cannot be enabled simultaneously." "$LINENO" 5
+
+if test "x$with_X11" = xno && test "x$with_wayland" = xno; then
+  with_X11=yes
 fi
 
-# Default to X11 if no option is specified
-if test "x$with_X11" = xno && test "x$with_wayland" = xno && test "x$with_ncurses" = xno; then
-  with_X11=yes
+if test "x$with_X11" = xyes; then
+  { printf "%s\n" "$as_me:${as_lineno-$LINENO}: checking for XOpenDisplay in -lX11" >&5
+printf %s "checking for XOpenDisplay in -lX11... " >&6; }
+if test ${ac_cv_lib_X11_XOpenDisplay+y}
+then :
+  printf %s "(cached) " >&6
+else $as_nop
+  ac_check_lib_save_LIBS=$LIBS
+LIBS="-lX11  $LIBS"
+cat confdefs.h - <<_ACEOF >conftest.$ac_ext
+/* end confdefs.h.  */
+
+/* Override any GCC internal prototype to avoid an error.
+   Use char because int might match the return type of a GCC
+   builtin and then its argument prototype would still apply.  */
+char XOpenDisplay ();
+int
+main (void)
+{
+return XOpenDisplay ();
+  ;
+  return 0;
+}
+_ACEOF
+if ac_fn_c_try_link "$LINENO"
+then :
+  ac_cv_lib_X11_XOpenDisplay=yes
+else $as_nop
+  ac_cv_lib_X11_XOpenDisplay=no
+fi
+rm -f core conftest.err conftest.$ac_objext conftest.beam \
+    conftest$ac_exeext conftest.$ac_ext
+LIBS=$ac_check_lib_save_LIBS
+fi
+{ printf "%s\n" "$as_me:${as_lineno-$LINENO}: result: $ac_cv_lib_X11_XOpenDisplay" >&5
+printf "%s\n" "$ac_cv_lib_X11_XOpenDisplay" >&6; }
+if test "x$ac_cv_lib_X11_XOpenDisplay" = xyes
+then :
+  printf "%s\n" "#define HAVE_LIBX11 1" >>confdefs.h
+
+  LIBS="-lX11 $LIBS"
+
+fi
+
+fi
+
+if test "x$with_wayland" = xyes; then
+  { printf "%s\n" "$as_me:${as_lineno-$LINENO}: checking for wl_display_get_fd in -lwayland-client" >&5
+printf %s "checking for wl_display_get_fd in -lwayland-client... " >&6; }
+if test ${ac_cv_lib_wayland_client_wl_display_get_fd+y}
+then :
+  printf %s "(cached) " >&6
+else $as_nop
+  ac_check_lib_save_LIBS=$LIBS
+LIBS="-lwayland-client  $LIBS"
+cat confdefs.h - <<_ACEOF >conftest.$ac_ext
+/* end confdefs.h.  */
+
+/* Override any GCC internal prototype to avoid an error.
+   Use char because int might match the return type of a GCC
+   builtin and then its argument prototype would still apply.  */
+char wl_display_get_fd ();
+int
+main (void)
+{
+return wl_display_get_fd ();
+  ;
+  return 0;
+}
+_ACEOF
+if ac_fn_c_try_link "$LINENO"
+then :
+  ac_cv_lib_wayland_client_wl_display_get_fd=yes
+else $as_nop
+  ac_cv_lib_wayland_client_wl_display_get_fd=no
+fi
+rm -f core conftest.err conftest.$ac_objext conftest.beam \
+    conftest$ac_exeext conftest.$ac_ext
+LIBS=$ac_check_lib_save_LIBS
+fi
+{ printf "%s\n" "$as_me:${as_lineno-$LINENO}: result: $ac_cv_lib_wayland_client_wl_display_get_fd" >&5
+printf "%s\n" "$ac_cv_lib_wayland_client_wl_display_get_fd" >&6; }
+if test "x$ac_cv_lib_wayland_client_wl_display_get_fd" = xyes
+then :
+  printf "%s\n" "#define HAVE_LIBWAYLAND_CLIENT 1" >>confdefs.h
+
+  LIBS="-lwayland-client $LIBS"
+
+fi
+
+fi
+
+if test "x$with_GL" = xyes; then
+  { printf "%s\n" "$as_me:${as_lineno-$LINENO}: checking for glClear in -lGL" >&5
+printf %s "checking for glClear in -lGL... " >&6; }
+if test ${ac_cv_lib_GL_glClear+y}
+then :
+  printf %s "(cached) " >&6
+else $as_nop
+  ac_check_lib_save_LIBS=$LIBS
+LIBS="-lGL  $LIBS"
+cat confdefs.h - <<_ACEOF >conftest.$ac_ext
+/* end confdefs.h.  */
+
+/* Override any GCC internal prototype to avoid an error.
+   Use char because int might match the return type of a GCC
+   builtin and then its argument prototype would still apply.  */
+char glClear ();
+int
+main (void)
+{
+return glClear ();
+  ;
+  return 0;
+}
+_ACEOF
+if ac_fn_c_try_link "$LINENO"
+then :
+  ac_cv_lib_GL_glClear=yes
+else $as_nop
+  ac_cv_lib_GL_glClear=no
+fi
+rm -f core conftest.err conftest.$ac_objext conftest.beam \
+    conftest$ac_exeext conftest.$ac_ext
+LIBS=$ac_check_lib_save_LIBS
+fi
+{ printf "%s\n" "$as_me:${as_lineno-$LINENO}: result: $ac_cv_lib_GL_glClear" >&5
+printf "%s\n" "$ac_cv_lib_GL_glClear" >&6; }
+if test "x$ac_cv_lib_GL_glClear" = xyes
+then :
+  printf "%s\n" "#define HAVE_LIBGL 1" >>confdefs.h
+
+  LIBS="-lGL $LIBS"
+
+fi
+
 fi
 
 ac_config_headers="$ac_config_headers include/config.h"

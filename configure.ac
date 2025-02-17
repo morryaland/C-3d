@@ -18,43 +18,45 @@ stddef.h
 )
 
 AC_ARG_WITH([X11], [  --with-X11 (default)],
-            [if test x$withval = xyes; then
+            [if test "x$withval" = xyes; then
               with_X11 = yes
               with_wayland = no
-              with_ncurses = no
             else
               with_X11 = no
             fi], [with_X11=yes])
 AC_ARG_WITH([wayland], [  --with-wayland],
-            [if test x$withval = xyes; then
+            [if test "x$withval" = xyes; then
               with_wayland = yes
               with_X11 = no
-              with_ncurses = no
             else
               with_wayland = no
             fi], [with_wayland=no])
-AC_ARG_WITH([ncurses],  [  --with-ncurses],
-            [if test x$withval = xyes; then
-              with_ncurses = yes
-              with_X11 = no
-              with_wayland = no
+
+AC_ARG_WITH([GL],  [  --with-GL],
+            [if test "x$withval" = xyes; then
+              with_GL = yes
             else
-              with_ncurses = no
-            fi], [with_ncurses=no])
+              with_GL = no
+            fi], [with_GL=no])
 
 if test "x$with_X11" = xyes && test "x$with_wayland" = xyes; then
   AC_MSG_ERROR([X11 and Wayland support cannot be enabled simultaneously.])
 fi
-if test "x$with_X11" = xyes && test "x$with_ncurses" = xyes; then
-  AC_MSG_ERROR([X11 and Ncurses support cannot be enabled simultaneously.])
-fi
-if test "x$with_wayland" = xyes && test "x$with_ncurses" = xyes; then
-  AC_MSG_ERROR([Wayland and Ncurses support cannot be enabled simultaneously.])
+
+if test "x$with_X11" = xno && test "x$with_wayland" = xno; then
+  with_X11=yes
 fi
 
-# Default to X11 if no option is specified
-if test "x$with_X11" = xno && test "x$with_wayland" = xno && test "x$with_ncurses" = xno; then
-  with_X11=yes
+if test "x$with_X11" = xyes; then
+  AC_CHECK_LIB([X11], [XOpenDisplay])
+fi
+
+if test "x$with_wayland" = xyes; then
+  AC_CHECK_LIB([wayland-client], [wl_display_get_fd])
+fi
+
+if test "x$with_GL" = xyes; then
+  AC_CHECK_LIB([GL], [glClear])
 fi
 
 AC_CONFIG_HEADERS(include/config.h)

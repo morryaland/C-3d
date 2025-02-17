@@ -6,6 +6,15 @@
 /* Define to 1 if you have the <inttypes.h> header file. */
 #undef HAVE_INTTYPES_H
 
+/* Define to 1 if you have the `GL' library (-lGL). */
+#undef HAVE_LIBGL
+
+/* Define to 1 if you have the `wayland-client' library (-lwayland-client). */
+#undef HAVE_LIBWAYLAND_CLIENT
+
+/* Define to 1 if you have the `X11' library (-lX11). */
+#undef HAVE_LIBX11
+
 /* Define to 1 if you have the <math.h> header file. */
 #undef HAVE_MATH_H
 
