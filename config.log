@@ -41,23 +41,23 @@ PATH: /usr/lib/jvm/default-jre/bin/
 ## Core tests. ##
 ## ----------- ##
 
-configure:2445: looking for aux files: config.guess config.sub install-sh
-configure:2458:  trying ./
-configure:2487:   ./config.guess found
-configure:2487:   ./config.sub found
-configure:2469:   ./install-sh found
-configure:2662: checking for gcc
-configure:2683: found /usr/bin/gcc
-configure:2694: result: gcc
-configure:3047: checking for C compiler version
-configure:3056: gcc --version >&5
+configure:2447: looking for aux files: config.guess config.sub install-sh
+configure:2460:  trying ./
+configure:2489:   ./config.guess found
+configure:2489:   ./config.sub found
+configure:2471:   ./install-sh found
+configure:2664: checking for gcc
+configure:2685: found /usr/bin/gcc
+configure:2696: result: gcc
+configure:3049: checking for C compiler version
+configure:3058: gcc --version >&5
 gcc (GCC) 13.2.0
 Copyright (C) 2023 Free Software Foundation, Inc.
 This is free software; see the source for copying conditions.  There is NO
 warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 
-configure:3067: $? = 0
-configure:3056: gcc -v >&5
+configure:3069: $? = 0
+configure:3058: gcc -v >&5
 Using built-in specs.
 COLLECT_GCC=gcc
 COLLECT_LTO_WRAPPER=/usr/lib64/gcc/x86_64-unknown-linux-gnu/13.2.0/lto-wrapper
@@ -66,66 +66,66 @@ Configured with: /builddir/gcc-13.2.0/configure --build=x86_64-unknown-linux-gnu
 Thread model: posix
 Supported LTO compression algorithms: zlib zstd
 gcc version 13.2.0 (GCC) 
-configure:3067: $? = 0
-configure:3056: gcc -V >&5
+configure:3069: $? = 0
+configure:3058: gcc -V >&5
 gcc: error: unrecognized command-line option '-V'
 gcc: fatal error: no input files
 compilation terminated.
-configure:3067: $? = 1
-configure:3056: gcc -qversion >&5
+configure:3069: $? = 1
+configure:3058: gcc -qversion >&5
 gcc: error: unrecognized command-line option '-qversion'; did you mean '--version'?
 gcc: fatal error: no input files
 compilation terminated.
-configure:3067: $? = 1
-configure:3056: gcc -version >&5
+configure:3069: $? = 1
+configure:3058: gcc -version >&5
 gcc: error: unrecognized command-line option '-version'
 gcc: fatal error: no input files
 compilation terminated.
-configure:3067: $? = 1
-configure:3087: checking whether the C compiler works
-configure:3109: gcc    conftest.c  >&5
-configure:3113: $? = 0
-configure:3163: result: yes
-configure:3166: checking for C compiler default output file name
-configure:3168: result: a.out
-configure:3174: checking for suffix of executables
-configure:3181: gcc -o conftest    conftest.c  >&5
-configure:3185: $? = 0
-configure:3208: result: 
-configure:3230: checking whether we are cross compiling
-configure:3238: gcc -o conftest    conftest.c  >&5
-configure:3242: $? = 0
-configure:3249: ./conftest
-configure:3253: $? = 0
-configure:3268: result: no
-configure:3273: checking for suffix of object files
-configure:3296: gcc -c   conftest.c >&5
-configure:3300: $? = 0
-configure:3322: result: o
-configure:3326: checking whether the compiler supports GNU C
-configure:3346: gcc -c   conftest.c >&5
-configure:3346: $? = 0
-configure:3356: result: yes
-configure:3367: checking whether gcc accepts -g
-configure:3388: gcc -c -g  conftest.c >&5
-configure:3388: $? = 0
-configure:3432: result: yes
-configure:3452: checking for gcc option to enable C11 features
-configure:3467: gcc  -c -g -O2  conftest.c >&5
-configure:3467: $? = 0
-configure:3485: result: none needed
-configure:3664: checking for g++
-configure:3685: found /usr/bin/g++
-configure:3696: result: g++
-configure:3723: checking for C++ compiler version
-configure:3732: g++ --version >&5
+configure:3069: $? = 1
+configure:3089: checking whether the C compiler works
+configure:3111: gcc    conftest.c  >&5
+configure:3115: $? = 0
+configure:3165: result: yes
+configure:3168: checking for C compiler default output file name
+configure:3170: result: a.out
+configure:3176: checking for suffix of executables
+configure:3183: gcc -o conftest    conftest.c  >&5
+configure:3187: $? = 0
+configure:3210: result: 
+configure:3232: checking whether we are cross compiling
+configure:3240: gcc -o conftest    conftest.c  >&5
+configure:3244: $? = 0
+configure:3251: ./conftest
+configure:3255: $? = 0
+configure:3270: result: no
+configure:3275: checking for suffix of object files
+configure:3298: gcc -c   conftest.c >&5
+configure:3302: $? = 0
+configure:3324: result: o
+configure:3328: checking whether the compiler supports GNU C
+configure:3348: gcc -c   conftest.c >&5
+configure:3348: $? = 0
+configure:3358: result: yes
+configure:3369: checking whether gcc accepts -g
+configure:3390: gcc -c -g  conftest.c >&5
+configure:3390: $? = 0
+configure:3434: result: yes
+configure:3454: checking for gcc option to enable C11 features
+configure:3469: gcc  -c -g -O2  conftest.c >&5
+configure:3469: $? = 0
+configure:3487: result: none needed
+configure:3666: checking for g++
+configure:3687: found /usr/bin/g++
+configure:3698: result: g++
+configure:3725: checking for C++ compiler version
+configure:3734: g++ --version >&5
 g++ (GCC) 13.2.0
 Copyright (C) 2023 Free Software Foundation, Inc.
 This is free software; see the source for copying conditions.  There is NO
 warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 
-configure:3743: $? = 0
-configure:3732: g++ -v >&5
+configure:3745: $? = 0
+configure:3734: g++ -v >&5
 Using built-in specs.
 COLLECT_GCC=g++
 COLLECT_LTO_WRAPPER=/usr/lib64/gcc/x86_64-unknown-linux-gnu/13.2.0/lto-wrapper
@@ -134,27 +134,27 @@ Configured with: /builddir/gcc-13.2.0/configure --build=x86_64-unknown-linux-gnu
 Thread model: posix
 Supported LTO compression algorithms: zlib zstd
 gcc version 13.2.0 (GCC) 
-configure:3743: $? = 0
-configure:3732: g++ -V >&5
+configure:3745: $? = 0
+configure:3734: g++ -V >&5
 g++: error: unrecognized command-line option '-V'
 g++: fatal error: no input files
 compilation terminated.
-configure:3743: $? = 1
-configure:3732: g++ -qversion >&5
+configure:3745: $? = 1
+configure:3734: g++ -qversion >&5
 g++: error: unrecognized command-line option '-qversion'; did you mean '--version'?
 g++: fatal error: no input files
 compilation terminated.
-configure:3743: $? = 1
-configure:3747: checking whether the compiler supports GNU C++
-configure:3767: g++ -c   conftest.cpp >&5
-configure:3767: $? = 0
-configure:3777: result: yes
-configure:3788: checking whether g++ accepts -g
-configure:3809: g++ -c -g  conftest.cpp >&5
-configure:3809: $? = 0
-configure:3853: result: yes
-configure:3873: checking for g++ option to enable C++11 features
-configure:3888: g++  -c -g -O2  conftest.cpp >&5
+configure:3745: $? = 1
+configure:3749: checking whether the compiler supports GNU C++
+configure:3769: g++ -c   conftest.cpp >&5
+configure:3769: $? = 0
+configure:3779: result: yes
+configure:3790: checking whether g++ accepts -g
+configure:3811: g++ -c -g  conftest.cpp >&5
+configure:3811: $? = 0
+configure:3855: result: yes
+configure:3875: checking for g++ option to enable C++11 features
+configure:3890: g++  -c -g -O2  conftest.cpp >&5
 conftest.cpp: In function 'int main(int, char**)':
 conftest.cpp:175:25: warning: empty parentheses were disambiguated as a function declaration [-Wvexing-parse]
   175 |   cxx11test::delegate d2();
@@ -164,79 +164,79 @@ conftest.cpp:175:25: note: remove parentheses to default-initialize a variable
       |                         ^~
       |                         --
 conftest.cpp:175:25: note: or replace parentheses with braces to value-initialize a variable
-configure:3888: $? = 0
-configure:3906: result: none needed
-configure:3986: checking for a BSD-compatible install
-configure:4059: result: /usr/bin/install -c
-configure:4071: checking for a race-free mkdir -p
-configure:4115: result: /usr/bin/mkdir -p
-configure:4124: checking build system type
-configure:4139: result: x86_64-pc-linux-gnu
-configure:4159: checking host system type
-configure:4173: result: x86_64-pc-linux-gnu
-configure:4199: checking for stdio.h
-configure:4199: gcc -c -g -O2  conftest.c >&5
-configure:4199: $? = 0
-configure:4199: result: yes
-configure:4199: checking for stdlib.h
-configure:4199: gcc -c -g -O2  conftest.c >&5
-configure:4199: $? = 0
-configure:4199: result: yes
-configure:4199: checking for string.h
-configure:4199: gcc -c -g -O2  conftest.c >&5
-configure:4199: $? = 0
-configure:4199: result: yes
-configure:4199: checking for inttypes.h
-configure:4199: gcc -c -g -O2  conftest.c >&5
-configure:4199: $? = 0
-configure:4199: result: yes
-configure:4199: checking for stdint.h
-configure:4199: gcc -c -g -O2  conftest.c >&5
-configure:4199: $? = 0
-configure:4199: result: yes
-configure:4199: checking for strings.h
-configure:4199: gcc -c -g -O2  conftest.c >&5
-configure:4199: $? = 0
-configure:4199: result: yes
-configure:4199: checking for sys/stat.h
-configure:4199: gcc -c -g -O2  conftest.c >&5
-configure:4199: $? = 0
-configure:4199: result: yes
-configure:4199: checking for sys/types.h
-configure:4199: gcc -c -g -O2  conftest.c >&5
-configure:4199: $? = 0
-configure:4199: result: yes
-configure:4199: checking for unistd.h
-configure:4199: gcc -c -g -O2  conftest.c >&5
-configure:4199: $? = 0
-configure:4199: result: yes
-configure:4224: checking for stdbool.h
-configure:4224: gcc -c -g -O2  conftest.c >&5
-configure:4224: $? = 0
-configure:4224: result: yes
-configure:4230: checking for stdlib.h
-configure:4230: result: yes
-configure:4236: checking for stdio.h
-configure:4236: result: yes
-configure:4242: checking for math.h
-configure:4242: gcc -c -g -O2  conftest.c >&5
-configure:4242: $? = 0
-configure:4242: result: yes
-configure:4248: checking for string.h
-configure:4248: result: yes
-configure:4254: checking for assert.h
-configure:4254: gcc -c -g -O2  conftest.c >&5
-configure:4254: $? = 0
-configure:4254: result: yes
-configure:4260: checking for stddef.h
-configure:4260: gcc -c -g -O2  conftest.c >&5
-configure:4260: $? = 0
-configure:4260: result: yes
-configure:4320: checking for XOpenDisplay in -lX11
-configure:4343: gcc -o conftest -g -O2   conftest.c -lX11   >&5
-configure:4343: $? = 0
-configure:4353: result: yes
-configure:4576: creating ./config.status
+configure:3890: $? = 0
+configure:3908: result: none needed
+configure:3988: checking for a BSD-compatible install
+configure:4061: result: /usr/bin/install -c
+configure:4073: checking for a race-free mkdir -p
+configure:4117: result: /usr/bin/mkdir -p
+configure:4126: checking build system type
+configure:4141: result: x86_64-pc-linux-gnu
+configure:4161: checking host system type
+configure:4175: result: x86_64-pc-linux-gnu
+configure:4201: checking for stdio.h
+configure:4201: gcc -c -g -O2  conftest.c >&5
+configure:4201: $? = 0
+configure:4201: result: yes
+configure:4201: checking for stdlib.h
+configure:4201: gcc -c -g -O2  conftest.c >&5
+configure:4201: $? = 0
+configure:4201: result: yes
+configure:4201: checking for string.h
+configure:4201: gcc -c -g -O2  conftest.c >&5
+configure:4201: $? = 0
+configure:4201: result: yes
+configure:4201: checking for inttypes.h
+configure:4201: gcc -c -g -O2  conftest.c >&5
+configure:4201: $? = 0
+configure:4201: result: yes
+configure:4201: checking for stdint.h
+configure:4201: gcc -c -g -O2  conftest.c >&5
+configure:4201: $? = 0
+configure:4201: result: yes
+configure:4201: checking for strings.h
+configure:4201: gcc -c -g -O2  conftest.c >&5
+configure:4201: $? = 0
+configure:4201: result: yes
+configure:4201: checking for sys/stat.h
+configure:4201: gcc -c -g -O2  conftest.c >&5
+configure:4201: $? = 0
+configure:4201: result: yes
+configure:4201: checking for sys/types.h
+configure:4201: gcc -c -g -O2  conftest.c >&5
+configure:4201: $? = 0
+configure:4201: result: yes
+configure:4201: checking for unistd.h
+configure:4201: gcc -c -g -O2  conftest.c >&5
+configure:4201: $? = 0
+configure:4201: result: yes
+configure:4226: checking for stdbool.h
+configure:4226: gcc -c -g -O2  conftest.c >&5
+configure:4226: $? = 0
+configure:4226: result: yes
+configure:4232: checking for stdlib.h
+configure:4232: result: yes
+configure:4238: checking for stdio.h
+configure:4238: result: yes
+configure:4244: checking for math.h
+configure:4244: gcc -c -g -O2  conftest.c >&5
+configure:4244: $? = 0
+configure:4244: result: yes
+configure:4250: checking for string.h
+configure:4250: result: yes
+configure:4256: checking for assert.h
+configure:4256: gcc -c -g -O2  conftest.c >&5
+configure:4256: $? = 0
+configure:4256: result: yes
+configure:4262: checking for stddef.h
+configure:4262: gcc -c -g -O2  conftest.c >&5
+configure:4262: $? = 0
+configure:4262: result: yes
+configure:4344: checking for XOpenDisplay in -lX11
+configure:4367: gcc -o conftest -g -O2   conftest.c -lX11   >&5
+configure:4367: $? = 0
+configure:4377: result: yes
+configure:4659: creating ./config.status
 
 ## ---------------------- ##
 ## Running config.status. ##

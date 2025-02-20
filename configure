@@ -714,6 +714,7 @@ enable_option_checking
 with_X11
 with_wayland
 with_GL
+with_cairo
 '
       ac_precious_vars='build_alias
 host_alias
@@ -1350,6 +1351,7 @@ Optional Packages:
   --with-X11 (default)
   --with-wayland
   --with-GL
+  --with-cairo
 
 Some influential environment variables:
   CC          C compiler command
@@ -4280,11 +4282,13 @@ else $as_nop
 fi
 
 
+
 # Check whether --with-wayland was given.
 if test ${with_wayland+y}
 then :
   withval=$with_wayland; if test "x$withval" = xyes; then
               with_wayland = yes
+              with_cairo = yes
               with_X11 = no
             else
               with_wayland = no
@@ -4300,6 +4304,7 @@ if test ${with_GL+y}
 then :
   withval=$with_GL; if test "x$withval" = xyes; then
               with_GL = yes
+              with_cairo = no
             else
               with_GL = no
             fi
@@ -4308,8 +4313,27 @@ else $as_nop
 fi
 
 
+
+# Check whether --with-cairo was given.
+if test ${with_cairo+y}
+then :
+  withval=$with_cairo; if test "x$withval" = xyes; then
+              with_cairo = yes
+              with_GL = no
+            else
+              with_cairo = no
+            fi
+else $as_nop
+  with_GL=no
+fi
+
+
 if test "x$with_X11" = xyes && test "x$with_wayland" = xyes; then
   as_fn_error $? "X11 and Wayland support cannot be enabled simultaneously." "$LINENO" 5
+fi
+
+if test "x$with_GL" = xyes && test "x$with_cairo" = xyes; then
+  as_fn_error $? "GL and cairo support cannot be enabled simultaneously." "$LINENO" 5
 fi
 
 if test "x$with_X11" = xno && test "x$with_wayland" = xno; then
@@ -4358,52 +4382,8 @@ then :
 
   LIBS="-lX11 $LIBS"
 
-fi
-
-fi
-
-if test "x$with_wayland" = xyes; then
-  { printf "%s\n" "$as_me:${as_lineno-$LINENO}: checking for wl_display_get_fd in -lwayland-client" >&5
-printf %s "checking for wl_display_get_fd in -lwayland-client... " >&6; }
-if test ${ac_cv_lib_wayland_client_wl_display_get_fd+y}
-then :
-  printf %s "(cached) " >&6
 else $as_nop
-  ac_check_lib_save_LIBS=$LIBS
-LIBS="-lwayland-client  $LIBS"
-cat confdefs.h - <<_ACEOF >conftest.$ac_ext
-/* end confdefs.h.  */
-
-/* Override any GCC internal prototype to avoid an error.
-   Use char because int might match the return type of a GCC
-   builtin and then its argument prototype would still apply.  */
-char wl_display_get_fd ();
-int
-main (void)
-{
-return wl_display_get_fd ();
-  ;
-  return 0;
-}
-_ACEOF
-if ac_fn_c_try_link "$LINENO"
-then :
-  ac_cv_lib_wayland_client_wl_display_get_fd=yes
-else $as_nop
-  ac_cv_lib_wayland_client_wl_display_get_fd=no
-fi
-rm -f core conftest.err conftest.$ac_objext conftest.beam \
-    conftest$ac_exeext conftest.$ac_ext
-LIBS=$ac_check_lib_save_LIBS
-fi
-{ printf "%s\n" "$as_me:${as_lineno-$LINENO}: result: $ac_cv_lib_wayland_client_wl_display_get_fd" >&5
-printf "%s\n" "$ac_cv_lib_wayland_client_wl_display_get_fd" >&6; }
-if test "x$ac_cv_lib_wayland_client_wl_display_get_fd" = xyes
-then :
-  printf "%s\n" "#define HAVE_LIBWAYLAND_CLIENT 1" >>confdefs.h
-
-  LIBS="-lwayland-client $LIBS"
-
+  as_fn_error $? "Library for X11 not found." "$LINENO" 5
 fi
 
 fi
@@ -4450,9 +4430,112 @@ then :
 
   LIBS="-lGL $LIBS"
 
+else $as_nop
+  as_fn_error $? "Library for GL not found." "$LINENO" 5
 fi
 
 fi
+
+if test "x$with_cairo" = xyes; then
+  { printf "%s\n" "$as_me:${as_lineno-$LINENO}: checking for cairo_version in -lcairo" >&5
+printf %s "checking for cairo_version in -lcairo... " >&6; }
+if test ${ac_cv_lib_cairo_cairo_version+y}
+then :
+  printf %s "(cached) " >&6
+else $as_nop
+  ac_check_lib_save_LIBS=$LIBS
+LIBS="-lcairo  $LIBS"
+cat confdefs.h - <<_ACEOF >conftest.$ac_ext
+/* end confdefs.h.  */
+
+/* Override any GCC internal prototype to avoid an error.
+   Use char because int might match the return type of a GCC
+   builtin and then its argument prototype would still apply.  */
+char cairo_version ();
+int
+main (void)
+{
+return cairo_version ();
+  ;
+  return 0;
+}
+_ACEOF
+if ac_fn_c_try_link "$LINENO"
+then :
+  ac_cv_lib_cairo_cairo_version=yes
+else $as_nop
+  ac_cv_lib_cairo_cairo_version=no
+fi
+rm -f core conftest.err conftest.$ac_objext conftest.beam \
+    conftest$ac_exeext conftest.$ac_ext
+LIBS=$ac_check_lib_save_LIBS
+fi
+{ printf "%s\n" "$as_me:${as_lineno-$LINENO}: result: $ac_cv_lib_cairo_cairo_version" >&5
+printf "%s\n" "$ac_cv_lib_cairo_cairo_version" >&6; }
+if test "x$ac_cv_lib_cairo_cairo_version" = xyes
+then :
+  printf "%s\n" "#define HAVE_LIBCAIRO 1" >>confdefs.h
+
+  LIBS="-lcairo $LIBS"
+
+else $as_nop
+  as_fn_error $? "Library for cairo not found." "$LINENO" 5
+fi
+
+fi
+
+if test "x$with_wayland" = xyes; then
+  if test "x$with_GL" = xyes || test "x$with_cairo" = xyes; then
+    { printf "%s\n" "$as_me:${as_lineno-$LINENO}: checking for wl_display_get_fd in -lwayland-client" >&5
+printf %s "checking for wl_display_get_fd in -lwayland-client... " >&6; }
+if test ${ac_cv_lib_wayland_client_wl_display_get_fd+y}
+then :
+  printf %s "(cached) " >&6
+else $as_nop
+  ac_check_lib_save_LIBS=$LIBS
+LIBS="-lwayland-client  $LIBS"
+cat confdefs.h - <<_ACEOF >conftest.$ac_ext
+/* end confdefs.h.  */
+
+/* Override any GCC internal prototype to avoid an error.
+   Use char because int might match the return type of a GCC
+   builtin and then its argument prototype would still apply.  */
+char wl_display_get_fd ();
+int
+main (void)
+{
+return wl_display_get_fd ();
+  ;
+  return 0;
+}
+_ACEOF
+if ac_fn_c_try_link "$LINENO"
+then :
+  ac_cv_lib_wayland_client_wl_display_get_fd=yes
+else $as_nop
+  ac_cv_lib_wayland_client_wl_display_get_fd=no
+fi
+rm -f core conftest.err conftest.$ac_objext conftest.beam \
+    conftest$ac_exeext conftest.$ac_ext
+LIBS=$ac_check_lib_save_LIBS
+fi
+{ printf "%s\n" "$as_me:${as_lineno-$LINENO}: result: $ac_cv_lib_wayland_client_wl_display_get_fd" >&5
+printf "%s\n" "$ac_cv_lib_wayland_client_wl_display_get_fd" >&6; }
+if test "x$ac_cv_lib_wayland_client_wl_display_get_fd" = xyes
+then :
+  printf "%s\n" "#define HAVE_LIBWAYLAND_CLIENT 1" >>confdefs.h
+
+  LIBS="-lwayland-client $LIBS"
+
+else $as_nop
+  as_fn_error $? "Library for wayland not found." "$LINENO" 5
+fi
+
+  else
+    as_fn_error $? "wayland requires cairo or openGL to work." "$LINENO" 5
+  fi
+fi
+
 
 ac_config_headers="$ac_config_headers include/config.h"
 
