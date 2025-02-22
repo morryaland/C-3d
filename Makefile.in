@@ -9,8 +9,8 @@ OBJ_PATH = ./obj/
 SRC = $(shell find $(SRC_PATH) -type f -name '*.c')
 OBJ = $(patsubst $(SRC_PATH)%.c, $(OBJ_PATH)%.o,$(SRC))
 
-CFLAGS+= -g -O2 -I/usr/local/include -I./include @CFLAGS@
-LDFLAGS+= -lm -lpthread @LDFLAGS@
+CFLAGS+= -I/usr/local/include -I./include @CFLAGS@
+LDFLAGS+= -lm -lpthread @LDFLAGS@ @LIBS@
 
 .PHONY: all clean
 

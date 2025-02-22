@@ -8,8 +8,3 @@ int init_render()
   ret = init_window();
 
 }
-
-int init_xwindow()
-{
-  XCreateSimpleWindow(Display *, Window, int, int, unsigned int, unsigned int, unsigned int, unsigned long, unsigned long)
-}
